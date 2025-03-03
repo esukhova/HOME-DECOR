@@ -1,0 +1,228 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+.input {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  color: $gray-text-color;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 17px 20px;
+  border: 2px solid $green-color;
+  border-radius: 3px;
+
+  &::placeholder {
+    color: #A8ABA7;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+  }
+}
+
+.small-input {
+  box-sizing: border-box;
+  border: 1px solid $border-el-color;
+  border-radius: 5px;
+  padding: 2px;
+  text-align: center;
+  width: 40px;
+  height: 28px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: $green-text-color;
+
+  &:focus {
+    outline: 2px solid $border-el-color;
+  }
+}
+
+.button {
+  box-sizing: border-box;
+  padding: 15px;
+  background: #456F49;
+  border-radius: 5px;
+  border: 1px solid #456F49;
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  &:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  &.button-transparent {
+    background: transparent;
+    border: 1px solid $border-el-color;
+    color: $green-text-color;
+  }
+
+  &.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      margin-left: 16px;
+    }
+  }
+
+  &.button-in-card {
+    font-size: 16px;
+
+    span {
+      &:first-child {
+        display: block;
+      }
+
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
+  &:hover {
+    &.button-in-card span {
+      &:first-child {
+        display: none;
+      }
+
+      &:last-child {
+        display: block;
+      }
+    }
+  }
+}
+
+
+a.button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.empty {
+  margin: 20px 0 100px;
+
+  div {
+    font-size: 16px;
+  }
+
+  .button {
+    width: 255px;
+    margin-top: 10px;
+  }
+}
+
+.mat-mdc-menu-item {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+
+  a {
+    text-decoration: none;
+    color: $gray-text-color;
+  }
+}
+
+.carousel-header {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .carousel-title {
+    @include head-lora-32;
+  }
+
+  .carousel-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid $green-color;
+  box-sizing: border-box;
+  border-radius: 100%;
+  background: #fff;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: $green-color;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.mat-mdc-dialog-surface {
+  border-radius: 10px !important;
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $border-el-color !important;
+}
+

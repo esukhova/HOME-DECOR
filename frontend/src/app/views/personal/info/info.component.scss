@@ -1,0 +1,27 @@
+@use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
+@use "../../../../../public/assets/styles/data-form" as *;
+@use "../../../../../public/assets/styles/personal" as *;
+
+
+.info {
+  padding: 50px 128px;
+  position: relative;
+  overflow: hidden;
+  .container {
+    .data-form .button {
+      width: 169px;
+      font-size: 16px;
+    }
+  }
+
+  .page-image {
+    position: absolute;
+    bottom: 0;
+    right: calc(50% - 700px);
+    z-index: -1;
+    img {
+      vertical-align: bottom;
+    }
+  }
+}

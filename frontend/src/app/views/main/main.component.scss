@@ -1,0 +1,239 @@
+@use "../../../../public/assets/styles/variables" as *;
+@use "../../../../public/assets/styles/mixins" as *;
+
+.main {
+  background-image: url("../../../../public/assets/images/page/main.png");
+  background-repeat: no-repeat;
+  background-position-x: calc(50% + 210px);
+  padding: 58px 0 231px;
+
+  .container {
+    .main-title {
+      font-family: Lora, sans-serif;
+      font-weight: 400;
+      font-size: 60px;
+      line-height: 130%;
+      color: $green-color;
+      margin-bottom: 67px;
+    }
+
+    .main-text {
+      font-size: 18px;
+      line-height: 140%;
+      color: $green-text-color;
+      max-width: 528px;
+
+
+    }
+  }
+}
+
+.offers {
+  background-color: $green-bg-color;
+  padding: 80px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .offer {
+      width: 600px;
+      height: 250px;
+      padding: 35px 35px 0;
+      background: #FFFFFF;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      .offer-title {
+        font-size: 20px;
+        line-height: 130%;
+        color: $green-text-color;
+      }
+
+      .offer-content {
+        display: flex;
+
+        .offer-text {
+          font-size: 16px;
+          line-height: 130%;
+          color: $green-text-color;
+        }
+      }
+
+      &.offer-insta {
+        .offer-image {
+          margin-top: 35px;
+        }
+
+        .offer-text {
+          margin-top: 16px;
+          margin-left: 58px;
+          max-width: 234px;
+        }
+
+        .offer-button {
+          margin-top: 22px;
+          margin-left: 168px;
+
+          .button {
+            width: 228px;
+          }
+        }
+      }
+
+      &.offer-collection {
+        .offer-title {
+          max-width: 362px;
+        }
+
+        .offer-image {
+          margin-top: 12px;
+          margin-left: 81px;
+        }
+
+        .offer-button {
+          margin-top: 75px;
+          margin-left: 44px;
+
+          .button {
+            width: 177px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.best-products {
+  padding: 120px 0 130px;
+}
+
+.info {
+  padding: 80px 0;
+  background-color: $green-bg-color;
+  background-image: url("../../../../public/assets/images/page/info-bg.png");
+  background-repeat: no-repeat;
+  background-position-x: calc(50% + 340px);
+
+  .container {
+    .info-title {
+      @include head-lora-32;
+      margin-bottom: 5px;
+    }
+
+    .info-item {
+      margin-top: 35px;
+      color: #000000;
+      max-width: 442px;
+
+      .info-image {
+        margin-bottom: 30px;
+      }
+
+      .info-text {
+        font-size: 16px;
+
+        .info-text-extra {
+          margin-top: 8px;
+          font-family: Montserrat, sans-serif;
+          font-style: italic;
+          font-weight: 300;
+          line-height: 130%;
+        }
+      }
+
+      &.info-delivery {
+        .info-text:last-child {
+          margin-top: 16px;
+        }
+      }
+
+      &.info-payment {
+        .info-text {
+          margin-bottom: 10px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.reviews {
+  margin: 130px 0;
+
+  .container {
+    .reviews-title {
+      @include head-lora-32;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .reviews-carousel {
+      position: relative;
+
+      .reviews-item {
+        font-size: 16px;
+        width: 396px;
+        height: 267px;
+        padding: 30px;
+        box-sizing: border-box;
+        border: 2px solid $green-color;
+        border-radius: 10px;
+
+        .reviews-item-head {
+          display: flex;
+          align-items: center;
+
+          .reviews-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+            margin-right: 26px;
+          }
+
+          .reviews-item-name {
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            color: $green-text-color;
+          }
+        }
+
+        .reviews-item-text {
+          margin-top: 15px;
+          line-height: 140%;
+          color: $gray-text-color;
+        }
+      }
+
+      .reviews-arrows {
+        display: flex;
+
+        a {
+          top: calc(50% - 5px);
+          display: flex;
+          position: absolute;
+          cursor: pointer;
+
+          &.move-backward {
+            left: -41px;
+          }
+
+          &.move-forward {
+            right: -41px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.map {
+  iframe {
+    vertical-align: bottom;
+  }
+}

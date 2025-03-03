@@ -1,0 +1,80 @@
+@use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
+@use "../../../../../public/assets/styles/personal" as *;
+
+.orders {
+  padding: 50px 156px;
+  font-size: 16px;
+
+  .container {
+    .orders-title {
+      font-weight: 500;
+      color: $gray-text-color;
+      margin-bottom: 14px;
+    }
+
+    .orders-title-additional {
+      color: $gray-text-color;
+      margin-bottom: 67px;
+    }
+
+    .orders-list {
+      .orders-list-item {
+        border-bottom: 1px solid $light-green-color;
+        padding-bottom: 46px;
+        margin-bottom: 47px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        &:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        .orders-list-item-number {
+          font-size: 20px;
+          text-decoration-line: underline;
+          color: #111111;
+          width: 297px;
+          margin-right: 20px;
+        }
+
+        .orders-list-item-products {
+          width: 509px;
+          margin-right: 20px;
+          color: #ADADAD;
+
+          .orders-list-item-products-count {
+            margin-bottom: 12px;
+          }
+
+          .orders-list-item-products-list tr td:first-child {
+            padding: 0 20px 0 10px;
+          }
+        }
+
+        .orders-list-item-status {
+          min-width: 125px;
+          padding: 8px 18px;
+          color: #456F49;
+          text-align: center;
+          box-sizing: border-box;
+          border: 1px solid #456F49;
+          border-radius: 50px;
+          background: transparent;
+        }
+
+        .orders-list-item-price {
+          width: 186px;
+          text-align: right;
+          font-weight: 600;
+          font-size: 22px;
+          color: $gray-text-color;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

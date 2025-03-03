@@ -1,0 +1,13 @@
+@use "../../../../../public/assets/styles/auth_form";
+
+.login {
+  .container {
+    display: flex;
+    .page-image {
+      margin-left: 49px;
+      img {
+        vertical-align: bottom;
+      }
+    }
+  }
+}
