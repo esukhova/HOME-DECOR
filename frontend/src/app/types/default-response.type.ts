@@ -1,4 +1,4 @@
-export type DefaultResponseType= {
-  error: boolean,
-  message: string
+export type DefaultResponseType = {
+    error: boolean,
+    message: string
 }

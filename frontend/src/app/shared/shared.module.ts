@@ -1,36 +1,39 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {PasswordRepeatDirective} from './directives/password-repeat.directive';
-import { ProductCardComponent } from './components/product-card/product-card.component';
+import {ProductCardComponent} from './components/product-card/product-card.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
-import { CountSelectorComponent } from './components/count-selector/count-selector.component';
-import { LoaderComponent } from './components/loader/loader.component';
+import {CategoryFilterComponent} from './components/category-filter/category-filter.component';
+import {CountSelectorComponent} from './components/count-selector/count-selector.component';
+import {LoaderComponent} from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 
 
 @NgModule({
-  declarations: [
-    PasswordRepeatDirective,
-    ProductCardComponent,
-    CategoryFilterComponent,
-    CountSelectorComponent,
-    LoaderComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    RouterModule
-  ],
-  exports: [
-    PasswordRepeatDirective,
-    ProductCardComponent,
-    CategoryFilterComponent,
-    CountSelectorComponent,
-    LoaderComponent
-  ]
+    declarations: [
+        PasswordRepeatDirective,
+        ProductCardComponent,
+        CategoryFilterComponent,
+        CountSelectorComponent,
+        LoaderComponent,
+        CookieBannerComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        RouterModule
+    ],
+    exports: [
+        PasswordRepeatDirective,
+        ProductCardComponent,
+        CategoryFilterComponent,
+        CountSelectorComponent,
+        LoaderComponent,
+        CookieBannerComponent
+    ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

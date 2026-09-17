@@ -1,14 +1,49 @@
 @use "../../../../../public/assets/styles/auth_form";
+@use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
 
 .signup {
-  margin-top: 10px;
-  .container {
+    margin-top: 10px;
     display: flex;
-    .page-image {
-      margin-left: 222px;
-      img {
-        vertical-align: bottom;
-      }
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    min-height: calc(100vh - clamp-f(200, 222, 992, 1320));
+
+    @include tablet {
+        min-height: calc(100vh - clamp-f(119, 200, 360, 991));
     }
-  }
+
+    .container {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .page-image {
+        margin-left: clamp-f(100, 222, 992, 1320);
+        align-self: end;
+        pointer-events: none;
+
+        @include mobile {
+            position: absolute;
+            bottom: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.3;
+            z-index: -1;
+            margin: 0;
+        }
+
+        img {
+            vertical-align: bottom;
+        }
+    }
+
+    .auth-form {
+
+        @include mobile {
+            margin: 0 auto 80px;
+        }
+    }
 }

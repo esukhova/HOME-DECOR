@@ -1,0 +1,11 @@
+<div class="cookie-banner" *ngIf="visible">
+    <div class="container cookie-banner__inner">
+        <p>
+            Мы используем cookie и localStorage для работы сайта (корзина, авторизация).
+            <a routerLink="/privacy">Подробнее</a>
+        </p>
+        <button class="button cookie-banner__button" type="button" (click)="accept()">
+            Принять
+        </button>
+    </div>
+</div>

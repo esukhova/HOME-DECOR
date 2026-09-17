@@ -1,0 +1,12 @@
+@use '../../../../public/assets/styles/variables' as *;
+@use '../../../../public/assets/styles/mixins' as *;
+
+.demo-banner {
+    background-color: $light-green-color;
+    color: $green-text-color;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 13px;
+    line-height: 1.4;
+    border-bottom: 1px solid $border-el-color;
+}

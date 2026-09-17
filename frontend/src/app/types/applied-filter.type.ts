@@ -1,4 +1,4 @@
-export type AppliedFilterType =  {
-  name:  string,
-  url: string
+export type AppliedFilterType = {
+    name: string,
+    url: string
 }

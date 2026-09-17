@@ -7,52 +7,52 @@ import {TypeType} from '../../types/type.type';
 import {CategoryWithTypeType} from '../../types/category-with-type.type';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getCategories(): Observable<CategoryType[]> {
-    return this.http.get<CategoryType[]>(environment.api + 'categories');
-  }
+    getCategories(): Observable<CategoryType[]> {
+        return this.http.get<CategoryType[]>(environment.api + 'categories');
+    }
 
-  getCategoriesWithTypes(): Observable<CategoryWithTypeType[]> {
-    return this.http.get<TypeType[]>(environment.api + 'types')
-      .pipe(
-        map((items: TypeType[]) => {
+    getCategoriesWithTypes(): Observable<CategoryWithTypeType[]> {
+        return this.http.get<TypeType[]>(environment.api + 'types')
+            .pipe(
+                map((items: TypeType[]) => {
 
-          const array: CategoryWithTypeType[] = [];
+                    const array: CategoryWithTypeType[] = [];
 
-          items.forEach((item: TypeType) => {
+                    items.forEach((item: TypeType) => {
 
-            const foundItem = array.find(arrayItem => arrayItem.url === item.category.url);
+                        const foundItem = array.find(arrayItem => arrayItem.url === item.category.url);
 
-            if (foundItem) {
-              foundItem.types.push({
-                id: item.id,
-                name: item.name,
-                url: item.url,
-              })
-            } else {
-              array.push({
-                id: item.category.id,
-                name: item.category.name,
-                url: item.category.url,
-                types: [{
-                  id: item.id,
-                  name: item.name,
-                  url: item.url,
-                }]
-              })
-            }
-          })
+                        if (foundItem) {
+                            foundItem.types.push({
+                                id: item.id,
+                                name: item.name,
+                                url: item.url,
+                            })
+                        } else {
+                            array.push({
+                                id: item.category.id,
+                                name: item.category.name,
+                                url: item.category.url,
+                                types: [{
+                                    id: item.id,
+                                    name: item.name,
+                                    url: item.url,
+                                }]
+                            })
+                        }
+                    })
 
 
-          return array;
-        })
-      );
-  }
+                    return array;
+                })
+            );
+    }
 
 }

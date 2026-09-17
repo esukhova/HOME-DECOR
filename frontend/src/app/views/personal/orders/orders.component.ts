@@ -1,37 +1,39 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../../shared/services/order.service';
-import {DefaultResponseType} from '../../../types/default-response.type';
 import {OrderType} from '../../../types/order.type';
-import {OrderComponent} from '../../order/order/order.component';
 import {OrderStatusUtil} from '../../../shared/utils/order-status.util';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-orders',
-  standalone: false,
-  templateUrl: './orders.component.html',
-  styleUrl: './orders.component.scss'
+    selector: 'app-orders',
+    standalone: false,
+    templateUrl: './orders.component.html',
+    styleUrl: './orders.component.scss'
 })
 export class OrdersComponent implements OnInit {
 
-  orders: OrderType[] = [];
+    orders: OrderType[] = [];
 
-  constructor(private orderService: OrderService) {
-  }
+    constructor(private orderService: OrderService,
+                private _snackBar: MatSnackBar) {
+    }
 
-  ngOnInit() {
-    this.orderService.getOrders()
-      .subscribe((data: OrderType[] | DefaultResponseType) => {
-        if ((data as DefaultResponseType).error !== undefined) {
-          throw new Error((data as DefaultResponseType).message);
-        }
+    ngOnInit() {
+        this.orderService.getOrders()
+            .subscribe({
+                next: (data: OrderType[]) => {
+                    this.orders = data.map(item => {
 
-        this.orders = (data as OrderType[]).map(item=> {
-
-          const status = OrderStatusUtil.getStatusAndColor(item.status);
-          item.statusRus = status.name;
-          item.color = status.color;
-          return item;
-        });
-      })
-  }
+                        const status = OrderStatusUtil.getStatusAndColor(item.status);
+                        item.statusRus = status.name;
+                        item.color = status.color;
+                        return item;
+                    })
+                },
+                error: (errorResponse: HttpErrorResponse) => {
+                    this._snackBar.open('Заказы не найдены');
+                }
+            });
+    }
 }

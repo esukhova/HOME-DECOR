@@ -2,24 +2,32 @@
 @use "./mixins" as *;
 
 .personal-title {
-  @include head-lora-32;
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+
+    @include head-lora-32;
 }
 
 .personal-pages-selector {
-  @include head-lora-26;
-  margin-bottom: 50px;
-  display: flex;
-  align-items: center;
+    margin-bottom: clamp-f(40, 50);
+    display: flex;
+    align-items: center;
 
-  .personal-page {
-    border-bottom: 2px solid $icon-color;
-    padding: 0 15px 12px;
-    cursor: pointer;
-    &.active {
-      border-bottom: 3px solid #519057;
+    @include head-lora-26;
+
+    .personal-page {
+        border-bottom: 2px solid $icon-color;
+        padding: 0 clamp-f(6, 15) clamp-f(4, 12);
+        cursor: pointer;
+        text-align: center;
+
+        &.active {
+            border-bottom: 3px solid #519057;
+        }
+
+        @include mobile {
+            flex-grow: 1;
+        }
     }
-  }
 }
 
 

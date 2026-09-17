@@ -1,0 +1,38 @@
+@use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
+
+.cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background-color: #FFFFFF;
+    border-top: 1px solid #6cac72;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    padding: 16px 0;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 130%;
+        flex: 1;
+    }
+
+    a {
+        color: #519057;
+        text-decoration: underline;
+    }
+
+    &__button {
+        flex-shrink: 0;
+        padding: 10px clamp-f(12, 24);
+    }
+}

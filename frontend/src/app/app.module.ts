@@ -17,27 +17,27 @@ import {AuthInterceptor} from './core/auth/auth.interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent
-  ],
-  imports: [
-    BrowserModule,
-    MatSnackBarModule,
-    MatMenuModule,
-    SharedModule,
-    CarouselModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule
-  ],
-  providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync(),
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LayoutComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainComponent,
+    ],
+    imports: [
+        BrowserModule,
+        MatSnackBarModule,
+        MatMenuModule,
+        SharedModule,
+        CarouselModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync(),
+        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -1,4 +1,4 @@
 export enum DeliveryType {
-  delivery = 'delivery',
-  self = 'self'
+    delivery = 'delivery',
+    self = 'self'
 }

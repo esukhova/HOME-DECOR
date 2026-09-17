@@ -1,26 +1,135 @@
-@use "./variables" as *;
+@use 'sass:string';
+@use 'sass:map';
+@use 'variables' as *;
+@use 'sass:math';
 
 @mixin head-lora-26 {
   font-family: Lora, sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 26px;
   color: $green-text-color;
+
+  @include font-styles('head-lora-26');
 }
 
 @mixin head-lora-32 {
   font-family: Lora, sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
   color: $green-text-color;
+
+  @include font-styles('head-lora-32');
 }
 
 @mixin head-lora-36 {
   font-family: Lora, sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 36px;
   color: #000000;
+
+  @include font-styles('head-lora-36');
 }
 
+@mixin container-width {
+  @media screen and (max-width: $container-width) {
+    @content
+  }
+}
+
+@mixin desktop {
+  @media (max-width: map.get($width, 'desktop')) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: map.get($width, 'tablet')) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: map.get($width, 'mobile')) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media (max-width: map.get($width, 'small-mobile')) {
+    @content;
+  }
+}
+
+@mixin small-desktop {
+  @media (min-width: 992px) and (max-height: 800px) {
+    @content;
+  }
+}
+
+@function clamp-f($min, $max, $min-width: 360, $max-width: 1320, $root-font-size: 16) {
+  $slope: math.div(($max - $min), ($max-width - $min-width));
+
+  // Вычисляем пересечение с осью Y
+  $y-axis-intersection-px: $min - $slope * $min-width;
+  $y-axis-intersection-rem: math.div($y-axis-intersection-px, $root-font-size);
+
+  $val: '#{$y-axis-intersection-rem}rem + #{$slope * 100}vw';
+
+  $min-rem: #{math.div($min, $root-font-size)}rem;
+  $max-rem: #{math.div($max, $root-font-size)}rem;
+
+  @return clamp(#{$min-rem}, #{$val}, #{$max-rem});
+}
+
+@function clamp-value($base-value, $base-screen-width: 1320, $min-screen-width: 1200, $root-font-size: 16) {
+  $scale-factor: math.div($base-value, $base-screen-width);
+
+  $min-px: $scale-factor * $min-screen-width;
+  $min-rem: math.div($min-px, $root-font-size);
+  $val-vw: $scale-factor * 100;
+  $max-rem: math.div($base-value, $root-font-size);
+
+  @return clamp(#{$min-rem}rem, #{$val-vw}vw, #{$max-rem}rem);
+}
+
+@function clamp-value-m($base-value, $base-screen-width: 360, $max-screen-width: 500, $min-screen-width: 360, $root-font-size: 16) {
+  $min-px: math.div($base-value * $min-screen-width, $base-screen-width);
+  $val-vw: math.div($base-value * 100, $base-screen-width);
+  $max-px: math.div($base-value * $max-screen-width, $base-screen-width);
+
+  $min-rem: math.div($min-px, $root-font-size);
+  $max-rem: math.div($max-px, $root-font-size);
+
+  @return clamp(#{$min-rem}rem, #{$val-vw}vw, #{$max-rem}rem);
+}
+
+@mixin font-styles($type) {
+  font-size: string.unquote(map.get($font-size, 'desktop', $type) + 'px');
+  line-height: map.get($line-height, 'desktop', $type);
+  font-weight: map.get($font-weight, 'desktop', $type);
+  letter-spacing: map.get($letter-spacing, 'desktop', $type);
+
+  @include small-desktop {
+    font-size: string.unquote(map.get($font-size, 'small-desktop', $type) + 'px');
+  }
+
+  @include tablet {
+    font-size: string.unquote(map.get($font-size, 'tablet', $type) + 'px');
+  }
+
+  @include mobile {
+    font-size: clamp-value-m(map.get($font-size, 'mobile', $type));
+    line-height: map.get($line-height, 'mobile', $type);
+    font-weight: map.get($font-weight, 'mobile', $type);
+    letter-spacing: map.get($letter-spacing, 'mobile', $type);
+  }
+
+  @media (max-width: 350px) {
+    font-size: clamp-value-m(map.get($font-size, '350px', $type));
+  }
+}
+
+@mixin hover {
+    @media (hover: hover) {
+        &:hover:not(:focus-visible) {
+            @content;
+        }
+    }
+}

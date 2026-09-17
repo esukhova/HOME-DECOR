@@ -2,107 +2,157 @@
 @use "./mixins" as *;
 
 .data-form {
-  max-width: 646px;
+    width: 100%;
+    max-width: 646px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-  .data-form-block {
-    margin-bottom: 30px;
+    @include tablet {
+        max-width: unset;
+    }
 
     .data-form-label {
-      margin-bottom: 20px;
-      font-weight: 500;
-      font-size: 16px;
-      color: $gray-text-color;
+        margin-bottom: clamp-f(12, 20);
+        font-weight: 500;
+        font-size: 16px;
+        color: $gray-text-color;
+
+        @include mobile {
+            font-size: clamp-value-m(16);
+        }
     }
 
     .data-form-label-additional {
-      font-size: 16px;
-      line-height: 130%;
-      color: $gray-text-color;
-      margin-bottom: 20px;
-      max-width: 528px;
+        line-height: 130%;
+        color: $gray-text-color;
+        margin-bottom: clamp-f(12, 20);
+        width: 100%;
+        max-width: 528px;
+
+        @include tablet {
+            max-width: unset;
+        }
     }
 
     .data-form-types {
-      display: flex;
-      align-items: center;
-      max-width: 340px;
-      box-sizing: border-box;
-      border-radius: 3px;
-      border: 1px solid #519157;
-      text-align: center;
-      font-size: 18px;
-      color: $gray-text-color;
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        width: 100%;
+        max-width: 340px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        border: 1px solid #519157;
+        font-size: 18px;
+        color: $gray-text-color;
 
-      .data-form-type {
-        cursor: pointer;
-        padding: 13px 35px;
-        background: transparent;
-
-        &.active {
-          background: #519157;
-          color: #FFFFFF;
+        @include mobile {
+            font-size: clamp-value-m(18);
+            max-width: unset;
         }
-      }
+
+        .data-form-type {
+            cursor: pointer;
+            padding: 13px clamp-f(12, 35);
+            background-color: transparent;
+            text-align: center;
+            width: 100%;
+
+            &.active {
+                background-color: #519157;
+                color: #FFFFFF;
+            }
+        }
     }
 
     .data-form-inputs {
-      display: grid;
-      gap: 8px;
+        display: grid;
+        gap: 8px;
 
-      &.personal-data-inputs {
-        grid-template-columns: repeat(3, 210px);
-      }
+        &.personal-data-inputs {
+            grid-template-columns: repeat(3, 210px);
 
-      &.address-inputs {
-        grid-template-columns: repeat(2, 125px) 162px;
-        grid-template-rows: repeat(2, 1fr);
-        grid-template-areas:
+            @include desktop {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include tablet {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @include mobile {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include small-mobile {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        &.address-inputs {
+            grid-template-columns: repeat(2, 125px) 162px;
+            grid-auto-rows: repeat(2, 1fr);
+            grid-template-areas:
                 "street street street"
                 "house entrance apartment";
 
-        .street {
-          grid-area: street;
+            .street {
+                grid-area: street;
+            }
+
+            .house {
+                grid-area: house;
+            }
+
+            .entrance {
+                grid-area: entrance;
+            }
+
+            .apartment {
+                grid-area: apartment;
+            }
+
+            @include desktop {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @include small-mobile {
+                grid-template-areas:
+                "street street"
+                "house entrance"
+                "apartment .";
+                grid-template-columns: repeat(2, 1fr);
+            }
+
         }
 
-        .house {
-          grid-area: house;
+        input[type=text] {
+            height: 53px;
+            display: flex;
+            width: 100%;
         }
-
-        .entrance {
-          grid-area: entrance;
-        }
-
-        .apartment {
-          grid-area: apartment;
-        }
-
-      }
-
-      input[type=text] {
-        height: 53px;
-      }
     }
 
     .data-form-radio {
-      .data-form-radio-block {
-        margin-bottom: 12px;
 
-        &:last-child {
-          margin-bottom: 0;
-        }
+        .data-form-radio-block {
+            margin-bottom: 12px;
+            text-shadow:  0 0 7px $bg-color;
 
-        label {
-          color: $gray-text-color;
-          font-size: 16px;
-        }
+            &:last-child {
+                margin-bottom: 0;
+            }
 
-        input:checked {
-          + label {
-            font-weight: 500;
-          }
+            label {
+                color: $gray-text-color;
+            }
+
+            input:checked {
+                + label {
+                    font-weight: 500;
+                }
+            }
         }
-      }
     }
-  }
-
 }

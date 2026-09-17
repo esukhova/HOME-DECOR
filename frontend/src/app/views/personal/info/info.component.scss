@@ -5,23 +5,29 @@
 
 
 .info {
-  padding: 50px 128px;
-  position: relative;
-  overflow: hidden;
-  .container {
-    .data-form .button {
-      width: 169px;
-      font-size: 16px;
-    }
-  }
+    padding:  clamp-f(20, 50) 0 clamp-f(20, 128);
+    position: relative;
+    overflow: hidden;
 
-  .page-image {
-    position: absolute;
-    bottom: 0;
-    right: calc(50% - 700px);
-    z-index: -1;
-    img {
-      vertical-align: bottom;
+    @include small-desktop {
+        padding: 0 0 clamp-f(20, 80);
     }
-  }
+
+    .data-form .button {
+        width: 169px;
+
+        @include font-styles('body');
+    }
+
+    .page-image {
+        position: absolute;
+        bottom: 0;
+        right: calc(50% - clamp-f(380, 700));
+        z-index: -1;
+        width: clamp-f(430, 1025, 500, 1320);
+
+        img {
+            vertical-align: bottom;
+        }
+    }
 }

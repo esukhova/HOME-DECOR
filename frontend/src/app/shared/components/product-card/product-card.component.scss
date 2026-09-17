@@ -1,80 +1,148 @@
 @use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
 
 .product-card {
-  width: 291px;
-  height: 498px;
-  box-sizing: border-box;
-  position: relative;
-
-  &.isLight {
+    //max-width: clamp-f(240, 291, 992, 1320);
+    width: 100%;
     height: auto;
-    cursor: pointer;
-  }
-
-  .product-card-favorite {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .product-card-image {
-    width: 291px;
-    height: 291px;
-    border-radius: 5px;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .product-card-name {
-    height: 52px;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 130%;
-    color: $green-text-color;
-    margin-top: 15px;
-  }
-
-  .product-card-info {
+    min-height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 18px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #C7C7C7;
+    flex-direction: column;
+
+    @include mobile {
+        max-width: clamp-value-m(320);
+    }
+
+    &--light {
+        height: auto;
+        cursor: pointer;
+    }
+
+    .product-card-favorite {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .product-card-image {
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .product-card-name {
+        height: 52px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 130%;
+        color: $green-text-color;
+        margin: 15px 0 clamp-f(12, 18);
+
+        @include mobile {
+            font-size: clamp-value-m(18);
+            line-height: 120%;
+            height: auto;
+        }
+    }
+
+    .product-card-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #C7C7C7;
+        gap: 8px;
+        margin-top: auto;
+    }
 
     .product-card-price {
-      font-family: Montserrat, sans-serif;
-      font-weight: 600;
-      font-size: 22px;
-      color: $green-text-color;
+        font-family: Montserrat, sans-serif;
+        font-weight: 600;
+        font-size: clamp-value(22);
+        color: $green-text-color;
+
+        @include mobile {
+            font-size: clamp-value-m(20);
+        }
     }
 
     .product-card-action {
-      .button {
-        width: 166px;
-      }
-    }
-  }
+        flex-grow: 1;
+        max-width: 166px;
 
-  .product-card-extra {
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        .button {
+            width: 100%;
+        }
+    }
+
+    .product-card-extra {
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .product-card-details {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-
-      span {
-        margin-left: 8px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
         font-size: 16px;
-        color: #9AA89B;
-      }
+
+        span {
+            margin-left: 8px;
+            color: #9AA89B;
+        }
     }
-  }
+
+    &--catalog {
+
+        .product-card-name {
+
+            @include mobile {
+                font-size: clamp-value-m(15);
+                line-height: 110%;
+            }
+        }
+
+        .product-card-info {
+
+            @include mobile {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        .product-card-price {
+
+            @include mobile {
+                font-size: clamp-value-m(20);
+            }
+        }
+
+        .product-card-action {
+
+            @include mobile {
+                max-width: unset;
+            }
+        }
+
+        .product-card-details {
+
+            @media (max-width: 500px) {
+                font-size: clamp-value-m(10);
+            }
+
+            span {
+                margin-left: clamp-f(4, 8);
+            }
+        }
+    }
 }

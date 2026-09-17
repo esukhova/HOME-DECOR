@@ -1,9 +1,149 @@
-$container-width: 1240px;
+@use 'sass:map';
+@use 'sass:math';
+
+$container-width: 1320px;
 $green-text-color: #202B21;
 $gray-text-color: #2C2C2C;
 $icon-color: #B6D5B9;
-$green-color:  #2A592E;
-$green-bg-color:  #A4CBA3;
-$green-filter-bg-color:  #B6D5B9;
+$green-color: #2A592E;
+$green-bg-color: #A4CBA3;
+$green-filter-bg-color: #B6D5B9;
 $light-green-color: #E7F1E8;
 $border-el-color: #6CAC72;
+$bg-color: #FFFFFF;
+
+$font-family: (
+    'title': ('Lora', sans-serif),
+    'text': ('Montserrat', sans-serif),
+);
+
+$font-size: (
+    'desktop': (
+        'h1': 60,
+        'h2': 48,
+        'h3': 30,
+        'big': 20,
+        'body': 16,
+        'head-lora-36': 36,
+        'head-lora-32': 32,
+        'head-lora-26': 26,
+    ),
+    'small-desktop': (
+        'h1': 60,
+        'h2': 48,
+        'h3': 30,
+        'big': 20,
+        'body': 16,
+        'head-lora-36': 36,
+        'head-lora-32': 32,
+        'head-lora-26': 26,
+    ),
+    'tablet': (
+        'h1': 60,
+        'h2': 48,
+        'h3': 30,
+        'big': 20,
+        'body': 16,
+        'head-lora-36': 36,
+        'head-lora-32': 32,
+        'head-lora-26': 26,
+    ),
+    'mobile': (
+        'h1': 32,
+        'h2': 30,
+        'h3': 20,
+        'big': 16,
+        'body': 15,
+        'head-lora-36': 24,
+        'head-lora-32': 22,
+        'head-lora-26': 20,
+    ),
+    '350px': (
+        'h1': 32,
+        'h2': 26,
+        'h3': 20,
+        'big': 16,
+        'body': 15,
+        'head-lora-36': 24,
+        'head-lora-32': 22,
+        'head-lora-26': 18,
+    )
+);
+
+$font-weight: (
+    'desktop': (
+        'h1': 400,
+        'h2': 800,
+        'h3': 700,
+        'big': 400,
+        'body': 400,
+        'head-lora-36': 400,
+        'head-lora-32': 400,
+        'head-lora-26': 400,
+    ),
+    'mobile': (
+        'h1': 400,
+        'h2': 800,
+        'h3': 700,
+        'big': 400,
+        'body': 400,
+        'head-lora-36': 400,
+        'head-lora-32': 400,
+        'head-lora-26': 400,
+    ),
+);
+
+$line-height: (
+    'desktop': (
+        'h1': 130%,
+        'h2': 130%,
+        'h3': 130%,
+        'big': 130%,
+        'body': 130%,
+        'head-lora-36': 130%,
+        'head-lora-32': 130%,
+        'head-lora-26': 130%,
+    ),
+    'mobile': (
+        'h1': 130%,
+        'h2': 130%,
+        'h3': 130%,
+        'big': 130%,
+        'body': 130%,
+        'head-lora-36': 130%,
+        'head-lora-32': 130%,
+        'head-lora-26': 130%,
+    ),
+);
+
+$letter-spacing: (
+    'desktop': (
+        'h1': initial,
+        'h2': initial,
+        'h3': initial,
+        'big': initial,
+        'body': initial,
+        'head-lora-36': initial,
+        'head-lora-32': initial,
+        'head-lora-26': initial,
+    ),
+    'mobile': (
+        'h1': initial,
+        'h2': initial,
+        'h3': initial,
+        'big': initial,
+        'body': initial,
+        'head-lora-36': initial,
+        'head-lora-32': initial,
+        'head-lora-26': initial,
+    ),
+);
+
+$width: (
+    'desktop': 1199px,
+    'tablet': 991px,
+    'mobile': 767px,
+    'small-mobile': 575px,
+);
+
+$root-font-size: 16px;

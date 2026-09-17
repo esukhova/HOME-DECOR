@@ -1,12 +1,30 @@
+@use "../../../../../public/assets/styles/variables" as *;
+@use "../../../../../public/assets/styles/mixins" as *;
+
 .count-selector {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 97px;
-  div {
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-  }
+    justify-content: space-between;
+    width: auto;
+    gap: clamp-f(2, 8);
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &--catalog {
+
+        .small-input {
+            width: clamp-f(24, 40);
+            height: clamp-f(20, 28);
+
+            @include mobile {
+                font-size: clamp-value-m(12);
+            }
+        }
+
+    }
 }
