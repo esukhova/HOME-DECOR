@@ -1,0 +1,58 @@
+name: Release
+on:
+    workflow_dispatch:
+        inputs:
+            release:
+                description: 'Release folder name (empty = use .latest)'
+                required: false
+                default: ''
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: webfactory/ssh-agent@v0.9.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Add known hosts
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+            - name: Deploy release
+              env:
+                  SSH_HOST: ${{ secrets.SSH_HOST }}
+                  SSH_USER: ${{ secrets.SSH_USER }}
+                  INPUT_RELEASE: ${{ github.event.inputs.release }}
+              run: |
+                  ssh "${SSH_USER}@${SSH_HOST}" \
+                    "INPUT_RELEASE='${INPUT_RELEASE}' bash -s" <<'EOF'
+                  set -euo pipefail
+                  RELEASE="${INPUT_RELEASE:-}"
+                  if [ -z "${RELEASE}" ]; then
+                    RELEASE="$(cat /var/www/h-decor/releases/.latest)"
+                  fi
+                  if [ ! -d "/var/www/h-decor/releases/${RELEASE}" ]; then
+                    echo "Release not found: ${RELEASE}"
+                    exit 1
+                  fi
+                  PREVIOUS=""
+                  if [ -L /var/www/h-decor/current ]; then
+                    PREVIOUS="$(readlink -f /var/www/h-decor/current)"
+                  fi
+                  cd "/var/www/h-decor/releases/${RELEASE}/backend"
+                  npx migrate-mongo up
+                  ln -sfn "/var/www/h-decor/releases/${RELEASE}" /var/www/h-decor/current.tmp
+                  mv -T /var/www/h-decor/current.tmp /var/www/h-decor/current
+                  pm2 restart h-decor-api --update-env
+                  if ! curl -fsS http://127.0.0.1:3001/api/categories >/dev/null; then
+                    echo "Health check failed — rollback"
+                    if [ -n "${PREVIOUS}" ] && [ -d "${PREVIOUS}" ]; then
+                      ln -sfn "${PREVIOUS}" /var/www/h-decor/current.tmp
+                      mv -T /var/www/h-decor/current.tmp /var/www/h-decor/current
+                      pm2 restart h-decor-api --update-env
+                    fi
+                    exit 1
+                  fi
+                  cd /var/www/h-decor/releases
+                  ls -1dt */ 2>/dev/null | tail -n +4 | xargs -r rm -rf
+                  echo "Deployed ${RELEASE}"
+                  EOF

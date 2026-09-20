@@ -1,0 +1,61 @@
+name: Upload release
+on:
+    push:
+        branches: [main]
+jobs:
+    upload:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: npm
+                  cache-dependency-path: frontend/package-lock.json
+            - name: Build frontend
+              working-directory: frontend
+              run: |
+                  npm ci
+                  npx ng build --configuration production
+            - uses: webfactory/ssh-agent@v0.9.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Add known hosts
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+            - name: Upload release to server
+              env:
+                  SSH_HOST: ${{ secrets.SSH_HOST }}
+                  SSH_USER: ${{ secrets.SSH_USER }}
+              run: |
+                  RELEASE="$(date +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}"
+                  REMOTE="/var/www/h-decor/releases/${RELEASE}"
+                  ssh "${SSH_USER}@${SSH_HOST}" "mkdir -p ${REMOTE}/frontend ${REMOTE}/backend"
+                  rsync -az --delete \
+                    --chmod=D755,F644 \
+                    -e ssh \
+                    frontend/dist/frontend/browser/ \
+                    "${SSH_USER}@${SSH_HOST}:${REMOTE}/frontend/"
+                  rsync -az --delete \
+                    --chmod=D755,F644 \
+                    --exclude node_modules \
+                    --exclude .env \
+                    --exclude public/images/products \
+                    -e ssh \
+                    backend/ \
+                    "${SSH_USER}@${SSH_HOST}:${REMOTE}/backend/"
+                  ssh "${SSH_USER}@${SSH_HOST}" \
+                    "RELEASE='${RELEASE}' bash -s" <<'EOF'
+                  set -euo pipefail
+                  REMOTE="/var/www/h-decor/releases/${RELEASE}"
+                  BACKEND="${REMOTE}/backend"
+                  ln -sf /var/www/h-decor/shared/backend/.env "${BACKEND}/.env"
+                  mkdir -p "${BACKEND}/public/images"
+                  ln -sf /var/www/h-decor/shared/backend/public/images/products \
+                         "${BACKEND}/public/images/products"
+                  cd "${BACKEND}"
+                  npm ci --omit=dev
+                  echo "${RELEASE}" > /var/www/h-decor/releases/.latest
+                  echo "Uploaded ${RELEASE} (current not switched)"
+                  EOF
