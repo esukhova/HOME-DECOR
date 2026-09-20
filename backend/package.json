@@ -29,10 +29,10 @@
     "passport-jwt": "^4.0.0",
     "taffy": "^2.6.2",
     "taffydb": "^2.7.3",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "migrate-mongo": "^9.0.0"
   },
   "devDependencies": {
-    "migrate-mongo": "^9.0.0",
     "nodemon": "^2.0.19"
   }
 }
