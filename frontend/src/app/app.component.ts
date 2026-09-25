@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './core/auth/auth.service';
+import { CatalogScrollService } from './core/routing/catalog-scroll.service';
 
 @Component({
     selector: 'app-root',
@@ -9,7 +10,7 @@ import {AuthService} from './core/auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private catalogScroll: CatalogScrollService) {}
 
     ngOnInit(): void {
         this.authService.initSession();

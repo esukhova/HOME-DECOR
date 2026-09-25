@@ -1,4 +1,5 @@
-<div class="product-card" *ngIf="product" (click)="navigate()" [class.product-card--light]="variant==='light'" [class.product-card--catalog]="variant==='catalog'">
+<div class="product-card" *ngIf="product" (click)="navigate()" [class.product-card--light]="variant==='light'"
+     [class.product-card--catalog]="variant==='catalog'">
     <div class="product-card-favorite" *ngIf="variant!=='light'" (click)="updateFavorite()">
         <span *ngIf="!product.isInFavorite && isLogged">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,11 +38,13 @@
     <div class="product-card-extra" *ngIf="variant!=='light'">
         <count-selector [variant]="variant" [count]="count" (onCountChange)="updateCount($event)"></count-selector>
         <a [routerLink]="'/product/' + product.url" class="product-card-details">
-            <svg width="18" height="4" viewBox="0 0 18 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="2.66699" cy="2" r="2" fill="#9AA89B"/>
-                <circle cx="9.33398" cy="2" r="2" fill="#9AA89B"/>
-                <circle cx="16" cy="2" r="2" fill="#9AA89B"/>
-            </svg>
+            <div class="icon-wrapper">
+                <svg width="18" height="4" viewBox="0 0 18 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="2.66699" cy="2" r="2" fill="#9AA89B"/>
+                    <circle cx="9.33398" cy="2" r="2" fill="#9AA89B"/>
+                    <circle cx="16" cy="2" r="2" fill="#9AA89B"/>
+                </svg>
+            </div>
             <span>Подробнее</span>
         </a>
     </div>

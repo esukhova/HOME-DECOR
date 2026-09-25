@@ -2,27 +2,32 @@
     <div class="container">
         <div class="catalog-title">Каталог</div>
         <div class="catalog-head">
-            <div class="catalog-applied-filters">
-                <div class="catalog-applied-filter" *ngFor="let appliedFilter of appliedFilters">
-                    <span>{{ appliedFilter.name }}</span>
-                    <a (click)="removeAppliedFilter(appliedFilter)">
-                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="0.935622" y1="1.1499" x2="12.9564" y2="13.1707" stroke="#A8ABA7"
-                                  stroke-linecap="round"/>
-                            <line x1="12.9238" y1="1.12996" x2="0.903013" y2="13.1508" stroke="#A8ABA7"
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </a>
+            <div class="catalog-applied-filters-wrapper" [style.height.px]="appliedFiltersHeight">
+                <div #appliedFiltersContent class="catalog-applied-filters">
+                    <div class="catalog-applied-filter" *ngFor="let appliedFilter of appliedFilters">
+                        <span>{{ appliedFilter.name }}</span>
+                        <a (click)="removeAppliedFilter(appliedFilter)">
+                            <svg width="14" height="15" viewBox="0 0 14 15" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <line x1="0.935622" y1="1.1499" x2="12.9564" y2="13.1707" stroke="#A8ABA7"
+                                      stroke-linecap="round"/>
+                                <line x1="12.9238" y1="1.12996" x2="0.903013" y2="13.1508" stroke="#A8ABA7"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="catalog-sorting" [class.open]="sortingOpen" (click)="toggleSorting()">
                 <div class="catalog-sorting-head">
                     <span>Сортировать</span>
-                    <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8.00026 7.50003C7.41693 7.50003 6.83359 7.27503 6.39193 6.83337L0.958594 1.40003C0.716927 1.15837 0.716927 0.758366 0.958594 0.516699C1.20026 0.275033 1.60026 0.275033 1.84193 0.516699L7.27526 5.95003C7.67526 6.35003 8.32526 6.35003 8.72526 5.95003L14.1586 0.516699C14.4003 0.275033 14.8003 0.275033 15.0419 0.516699C15.2836 0.758366 15.2836 1.15837 15.0419 1.40003L9.60859 6.83337C9.16693 7.27503 8.58359 7.50003 8.00026 7.50003Z"
-                            fill="#2C2C2C"/>
-                    </svg>
+                    <div class="ícon-wrapper">
+                        <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.00026 7.50003C7.41693 7.50003 6.83359 7.27503 6.39193 6.83337L0.958594 1.40003C0.716927 1.15837 0.716927 0.758366 0.958594 0.516699C1.20026 0.275033 1.60026 0.275033 1.84193 0.516699L7.27526 5.95003C7.67526 6.35003 8.32526 6.35003 8.72526 5.95003L14.1586 0.516699C14.4003 0.275033 14.8003 0.275033 15.0419 0.516699C15.2836 0.758366 15.2836 1.15837 15.0419 1.40003L9.60859 6.83337C9.16693 7.27503 8.58359 7.50003 8.00026 7.50003Z"
+                                fill="#2C2C2C"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="catalog-sorting-body">
                     <div class="catalog-sorting-item"
@@ -57,7 +62,9 @@
                 <div class="catalog-products-loader" *ngIf="productsLoading">
                     <mat-spinner></mat-spinner>
                 </div>
-                <div class="catalog-products-feedback" *ngIf="!productsLoading && !productsRefreshing && products.length === 0">Товары не найдены. Попробуйте
+                <div class="catalog-products-feedback"
+                     *ngIf="!productsLoading && !productsRefreshing && products.length === 0">Товары не найдены.
+                    Попробуйте
                     изменить параметры поиска.
                 </div>
                 <product-card

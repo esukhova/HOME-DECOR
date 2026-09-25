@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../../shared/services/product.service';
 import {ProductType} from '../../../types/product.type';
 import {CategoryService} from '../../../shared/services/category.service';
@@ -15,14 +15,13 @@ import {FavoriteType} from '../../../types/favorite.type';
 import {AuthService} from '../../../core/auth/auth.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-
 @Component({
     selector: 'app-catalog',
     standalone: false,
     templateUrl: './catalog.component.html',
     styleUrl: './catalog.component.scss'
 })
-export class CatalogComponent implements OnInit, OnDestroy {
+export class CatalogComponent implements OnInit, AfterViewInit, OnDestroy {
 
     products: ProductType[] = [];
     categoriesWithTypes: CategoryWithTypeType[] = [];
@@ -44,6 +43,10 @@ export class CatalogComponent implements OnInit, OnDestroy {
     private productsLoadTimeout: ReturnType<typeof setTimeout> | null = null;
     private queryParamsInitialized = false;
     private readonly destroyRef = inject(DestroyRef);
+
+    @ViewChild('appliedFiltersContent') appliedFiltersContent?: ElementRef<HTMLElement>;
+    appliedFiltersHeight = 0;
+    private resizeAppliedFiltersObserver?: ResizeObserver;
 
     constructor(private productService: ProductService,
                 private categoryService: CategoryService,
@@ -70,6 +73,18 @@ export class CatalogComponent implements OnInit, OnDestroy {
             })
 
         this.filtersVisible = window.innerWidth > 768;
+    }
+
+    ngAfterViewInit() {
+        const el = this.appliedFiltersContent?.nativeElement;
+        if (!el) return;
+
+        this.resizeAppliedFiltersObserver = new ResizeObserver(entries => {
+            const height = Math.ceil(entries[0]?.target.scrollHeight ?? 0);
+            this.appliedFiltersHeight = (height + 2);
+        })
+
+        this.resizeAppliedFiltersObserver.observe(el);
     }
 
     private processFavorites(): void {
@@ -283,5 +298,6 @@ export class CatalogComponent implements OnInit, OnDestroy {
             clearTimeout(this.productsLoadTimeout);
             this.productsLoadTimeout = null;
         }
+        this.resizeAppliedFiltersObserver?.disconnect();
     }
 }

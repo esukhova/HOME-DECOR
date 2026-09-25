@@ -1,13 +1,29 @@
 @use "../../../../../public/assets/styles/variables" as *;
 @use "../../../../../public/assets/styles/mixins" as *;
 
+:host {
+
+    @include tablet {
+        display: block;
+        align-self: flex-start;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: $bg-color;
+        border-bottom: 1px solid gray;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
 header.header {
-    padding: clamp-f(15, 30) 0 clamp-f(20, 49);
+    padding: clamp-f(8, 30, 992, 1320) 0 clamp-f(12, 49, 992, 1320);
     font-size: clamp-f(12, 16, 1200, 1320);
 
     @include mobile {
         font-size: clamp-value-m(12);
-        position: relative;
+        //position: sticky;
+        top: 0;
     }
 
     .container {
@@ -30,7 +46,7 @@ header.header {
 
         @media (max-width: 500px) {
             position: absolute;
-            top: 15px;
+            top: 4px;
             left: 15px;
         }
     }
@@ -220,18 +236,27 @@ header.header {
             z-index: 10;
             right: 0;
             top: 61px;
-            width: 400px;
+            width:clamp-f(370, 400);
             background-color: #FFFFFF;
             border-radius: 5px;
             border: 1px solid #EBEBEB;
+
+            @include tablet {
+                right: unset;
+                left: 0;
+                max-width: calc(100vw - 32px);
+                border-color: gray;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            }
         }
 
         .search-product {
-            padding: 12px 23px;
+            padding: clamp-f(8, 12) clamp-f(8, 23);
             display: flex;
             align-items: center;
             cursor: pointer;
             background-color: #FFFFFF;
+            gap: clamp-f(6, 24);
 
             &:hover {
                 background-color: #EBEBEB;
@@ -254,7 +279,6 @@ header.header {
             border-radius: 5px;
             width: 40px;
             height: 40px;
-            margin-right: 25px;
             background-position: center;
             background-size: cover;
         }
@@ -263,6 +287,11 @@ header.header {
             font-size: 16px;
             line-height: 130%;
             color: #8E8E8E;
+
+            @include small-mobile {
+                font-size: clamp-value-m(14);
+                line-height: 130%;
+            }
         }
     }
 
@@ -365,7 +394,7 @@ header.header {
     }
 
     .burger-menu-btn--open {
-        transform: translateY(-50px);
+        position: fixed;
 
         span {
             opacity: 0;

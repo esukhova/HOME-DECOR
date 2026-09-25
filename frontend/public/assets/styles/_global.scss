@@ -14,7 +14,6 @@ html {
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -66,6 +65,9 @@ li {
 a, a:active, a:hover {
     text-decoration: none;
     cursor: pointer;
+}
+
+a, a:active:not(.button), a:hover:not(.button) {
     color: inherit;
 }
 
@@ -184,7 +186,7 @@ picture {
     border-radius: 5px;
     padding: 2px;
     text-align: center;
-    width: clamp-f(32, 40, 992, 1320);
+    width: 40px;
     height: 28px;
     font-family: Montserrat, sans-serif;
     font-weight: 400;
@@ -208,14 +210,16 @@ picture {
     font-size: 18px;
     color: #FFFFFF;
     cursor: pointer;
+    transition: background-color 0.2s;
 
     @include small-mobile {
         font-size: clamp-value-m(15);
     }
 
     &:disabled {
-        background: gray;
+        background-color: gray;
         cursor: not-allowed;
+        pointer-events: none;
     }
 
     &.button-transparent {
@@ -246,6 +250,9 @@ picture {
     }
 
     @include hover {
+        color: #FFFFFF;
+        background-color: #365c3a;
+
         &.button-in-card span {
             &:first-child {
                 display: none;
@@ -255,6 +262,11 @@ picture {
                 display: block;
             }
         }
+    }
+
+    &:active {
+        color: #FFFFFF;
+        background-color: #244227;
     }
 }
 

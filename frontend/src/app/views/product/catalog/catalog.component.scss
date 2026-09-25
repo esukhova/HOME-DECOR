@@ -2,7 +2,7 @@
 @use "../../../../../public/assets/styles/mixins" as *;
 
 .catalog {
-    padding: clamp-f(20, 100, 992, 1320) 0 clamp-f(30, 110, 992, 1320);
+    padding: 0 0 clamp-f(30, 110, 992, 1320);
     position: relative;
     min-height: calc(100vh - clamp-f(200, 222, 992, 1320));
 
@@ -11,7 +11,11 @@
     }
 
     @include small-desktop {
-        padding: clamp-f(20, 50, 992, 1320) 0 clamp-f(30, 60, 992, 1320);
+        padding: 0 0 clamp-f(30, 60, 992, 1320);
+    }
+
+    @include tablet {
+        padding-top: 12px;
     }
 
     .container {
@@ -24,7 +28,7 @@
 
     .catalog-title {
         color: $green-text-color;
-        margin-bottom: clamp-f(18, 33);
+        margin-bottom: clamp-f(12, 33);
         margin-left: clamp-value(317);
 
         @include head-lora-36;
@@ -34,7 +38,7 @@
         }
 
         @include tablet {
-            margin: 0 0 clamp-f(18, 33);
+            margin: 0 0 clamp-f(12, 33);
         }
     }
 
@@ -44,9 +48,15 @@
         justify-content: space-between;
         align-items: baseline;
         color: $gray-text-color;
+        transition: min-height 0.6s ease;
 
         @include tablet {
-            margin: 0 0 clamp-f(18, 32);
+            margin: 0 0 clamp-f(4, 32);
+        }
+
+        .catalog-applied-filters-wrapper {
+            overflow: hidden;
+            transition: height 0.35s ease;
         }
 
         .catalog-applied-filters {
@@ -54,23 +64,22 @@
             flex-wrap: wrap;
             column-gap: clamp-f(8, 20, 992, 1320);
             row-gap: 8px;
-            min-height: 85px;
+        }
 
-            .catalog-applied-filter {
-                padding: 8px 14px;
-                border: 1px solid $light-green-color;
-                border-radius: 50px;
+        .catalog-applied-filter {
+            padding: 8px 14px;
+            border: 1px solid $light-green-color;
+            border-radius: clamp-f(12, 50);
+            display: flex;
+            align-items: center;
+            height: min-content;
+
+            a {
+                text-decoration: none;
+                cursor: pointer;
                 display: flex;
                 align-items: center;
-                height: min-content;
-
-                a {
-                    text-decoration: none;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    margin-left: 9px;
-                }
+                margin-left: 9px;
             }
         }
 
@@ -78,19 +87,25 @@
             box-sizing: border-box;
             position: relative;
             transition: 0.2s max-width ease;
-            max-width: 170px;
+            max-width: max-content;
             user-select: none;
 
             .catalog-sorting-head {
                 display: flex;
                 align-items: center;
-                padding: 12px 0 12px clamp-f(18, 23);
+                padding: clamp-f(8, 12) 0 clamp-f(8, 12) clamp-f(18, 23);
                 justify-content: space-between;
                 color: $gray-text-color;
                 cursor: pointer;
+                gap: 20px;
 
-                span {
-                    margin-right: 20px;
+                .icon-wrapper {
+                    width: 16px;
+                    flex: 0 0 16px;
+                }
+
+                svg {
+                    transition: transform 0.4s ease;
                 }
             }
 
@@ -137,6 +152,10 @@
                     background-color: #EBEBEB;
                     border-radius: 5px 5px 0 0;
                     padding-right: 23px;
+
+                    svg {
+                        transform: rotate(180deg);
+                    }
                 }
 
                 .catalog-sorting-body {
@@ -155,6 +174,7 @@
 
         @include mobile {
             flex-direction: column;
+            margin-top: 0;
         }
     }
 

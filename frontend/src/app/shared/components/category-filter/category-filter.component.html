@@ -12,16 +12,15 @@
             <label *ngFor="let type of categoryWithTypes?.types" class="catalog-filter-checkbox">
                 <input type="checkbox" #input (change)="updateFilterParam(type.url, input.checked)"
                        [checked]="activeParams.types.includes(type.url)">
-                <!--      [checked]="activeParams.types.includes(type.url)-->
                 <span>{{ type.name }}</span>
             </label>
 
             <div class="catalog-filter-from-to" *ngIf="type">
                 <span>от</span>
-                <input type="number" min="0" step="1" [ngModel]="from"
+                <input type="text" maxlength="3" [ngModel]="from"
                        (ngModelChange)="updateFilterParamFromTo(type + 'From', $event)" class="small-input">
                 <span>до</span>
-                <input type="number" min="0" step="1" [ngModel]="to"
+                <input type="text" maxlength="3" [ngModel]="to"
                        (ngModelChange)="updateFilterParamFromTo(type + 'To', $event)" class="small-input">
                 <span>см</span>
             </div>
