@@ -95,7 +95,7 @@
                 <div class="order-consent">
                     <input type="checkbox" id="order-agree" formControlName="agree">
                     <label for="order-agree"
-                           [ngStyle]="{'color': orderForm.get('agree')?.invalid ? 'red': ''}">Я принимаю
+                           [ngStyle]="{'color': orderForm.get('agree')?.invalid && (orderForm.get('agree')?.dirty || orderForm.get('agree')?.touched) ? 'red': ''}">Я принимаю
                         <a routerLink="/terms">условия пользовательского соглашения</a> и даю
                         <a routerLink="/consent">согласие на обработку персональных данных.</a>
                     </label>

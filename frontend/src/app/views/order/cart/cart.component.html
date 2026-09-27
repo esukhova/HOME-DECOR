@@ -4,7 +4,7 @@
         <div class="cart-title">Корзина</div>
         <div class="cart-empty empty" *ngIf="!cart || cart.items.length === 0">
             <div>В корзине нет товаров</div>
-            <button class="button" routerLink="/catalog">В каталог</button>
+            <button class="button" routerLink="/catalog" [queryParams]="{page: 1}">В каталог</button>
         </div>
         <div class="cart-info" *ngIf="cart && cart.items.length > 0">
             <div class="cart-products">
@@ -44,7 +44,7 @@
                     <div class="cart-details-info-delivery">* без учета доставки</div>
                 </div>
                 <div class="cart-details-actions">
-                    <button class="button button-transparent" routerLink="/catalog">Продолжить покупки</button>
+                    <button class="button button-transparent" routerLink="/catalog" [queryParams]="{page: 1}">Продолжить покупки</button>
                     <button class="button" routerLink="/order">Оформить заказ</button>
                 </div>
             </div>
