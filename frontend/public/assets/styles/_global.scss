@@ -163,6 +163,11 @@ picture {
     }
 }
 
+.page-image {
+    max-width: 100%;
+    overflow: hidden;
+}
+
 .input {
     font-family: Montserrat, sans-serif;
     font-weight: 400;
@@ -192,10 +197,22 @@ picture {
     font-weight: 400;
     font-size: 18px;
     color: $green-text-color;
+    background-color: transparent;
 
     &:focus {
         outline: 2px solid $border-el-color;
     }
+
+    &:disabled {
+        opacity: 1;
+        color: inherit;
+        -webkit-text-fill-color: currentColor;
+        background-color: transparent;
+    }
+}
+
+textarea {
+    resize: none;
 }
 
 .button {
@@ -432,12 +449,26 @@ a.button {
 }
 
 .cdk-overlay-container {
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
+    //width: 100% !important;
+    //max-width: 100vw !important;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
-    display: none;
+.cdk-overlay-pane:has(.app-snackbar) {
+    //width: 100%;
+    //max-width: 100vw;
+    height: 100%;
+    max-height: 100%;
+    align-items: flex-start;
+}
+.app-snackbar .mat-mdc-snackbar-surface {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+}
+
+.app-snackbar {
+    margin-top: 20px !important;
 }
 
 @keyframes appearance {

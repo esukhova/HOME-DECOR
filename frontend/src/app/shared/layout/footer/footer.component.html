@@ -13,7 +13,7 @@
                             <a routerLink="/">Главная</a>
                         </li>
                         <li>
-                            <a routerLink="/catalog">Каталог</a>
+                            <a routerLink="/catalog" [queryParams]="{page: 1}">Каталог</a>
                         </li>
                         <li>
                             <a routerLink="/" fragment="info">Доставка и оплата</a>
@@ -34,7 +34,7 @@
                 <nav>
                     <ul>
                         <li *ngFor="let category of categories">
-                            <a routerLink="/catalog" [queryParams]="{types: category.typesUrl}">{{ category.name }}</a>
+                            <a routerLink="/catalog" [queryParams]="{types: category.typesUrl, page: 1}">{{ category.name }}</a>
                         </li>
                     </ul>
                 </nav>

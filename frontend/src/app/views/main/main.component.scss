@@ -14,7 +14,7 @@
     }
 
     @include tablet {
-        background-position-x: calc(50% + clamp-f(250, 450, 360, 992));
+        background-position-x: calc(50% + clamp-f(280, 450, 360, 992));
     }
 
     .main-title {

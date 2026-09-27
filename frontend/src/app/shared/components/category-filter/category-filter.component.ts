@@ -86,7 +86,12 @@ export class CategoryFilterComponent implements OnInit {
         });
     }
 
-    updateFilterParamFromTo(param: string, value: string) {
+    updateFilterParamFromTo(param: string, value: string, input?: HTMLInputElement) {
+            const cleaned = (value ?? '').replace(/\D/g, '').slice(0, 3);
+        if (input && input.value !== cleaned) {
+            input.value = cleaned;
+        }
+        value = cleaned;
         if (param === 'heightTo' || param === 'heightFrom' || param === 'diameterTo' || param === 'diameterFrom') {
             if (this.activeParams[param] && value === null) {
                 delete this.activeParams[param];

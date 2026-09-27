@@ -15,6 +15,7 @@ import {SharedModule} from './shared/shared.module';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {AuthInterceptor} from './core/auth/auth.interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AllowedCharsDirective } from './shared/directives/allowed-chars.directive';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         AppRoutingModule
     ],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync(),
-        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
+                duration: 2500,
+                verticalPosition: 'bottom',
+                horizontalPosition: 'center',
+                panelClass: 'app-snackbar',
+            }
+        },
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
     bootstrap: [AppComponent]
 })

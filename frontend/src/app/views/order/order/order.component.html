@@ -31,7 +31,7 @@
                                [ngStyle]="{'border-color': orderForm.get('fatherName')?.invalid
                    && (orderForm.get('fatherName')?.dirty || orderForm.get('fatherName')?.touched) ? 'red' : ''}"
                                formControlName="fatherName">
-                        <input class="input" type="text" placeholder="Телефон"
+                        <input class="input" type="text" placeholder="Телефон" inputmode="tel" allowedChars="0-9+" [maxChars]="12"
                                [ngStyle]="{'border-color': orderForm.get('phone')?.invalid
                    && (orderForm.get('phone')?.dirty || orderForm.get('phone')?.touched) ? 'red' : ''}"
                                formControlName="phone">
@@ -52,11 +52,11 @@
                                [ngStyle]="{'border-color': orderForm.get('house')?.invalid
                    && (orderForm.get('house')?.dirty || orderForm.get('house')?.touched) ? 'red' : ''}"
                                formControlName="house">
-                        <input class="input entrance" type="text" placeholder="Подъезд"
+                        <input class="input entrance" type="text" placeholder="Подъезд" inputmode="numeric" allowedChars="0-9"
                                [ngStyle]="{'border-color': orderForm.get('entrance')?.invalid
                    && (orderForm.get('entrance')?.dirty || orderForm.get('entrance')?.touched) ? 'red' : ''}"
                                formControlName="entrance">
-                        <input class="input apartment" type="text" placeholder="№ квартиры"
+                        <input class="input apartment" type="text" placeholder="№ квартиры" inputmode="numeric" allowedChars="0-9"
                                [ngStyle]="{'border-color': orderForm.get('apartment')?.invalid
                    && (orderForm.get('apartment')?.dirty || orderForm.get('apartment')?.touched) ? 'red' : ''}"
                                formControlName="apartment">

@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
                 debounceTime(500)
             )
             .subscribe(value => {
-                if (value && value.length > 2) {
+                if (value && value.length > 1) {
                     this.productService.searchProducts(value)
                         .subscribe((data: ProductType[]) => {
                             this.products = data;

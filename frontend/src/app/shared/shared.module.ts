@@ -9,6 +9,7 @@ import {CountSelectorComponent} from './components/count-selector/count-selector
 import {LoaderComponent} from './components/loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
+import { AllowedCharsDirective } from './directives/allowed-chars.directive';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.
         CategoryFilterComponent,
         CountSelectorComponent,
         LoaderComponent,
-        CookieBannerComponent
+        CookieBannerComponent,
+        AllowedCharsDirective
     ],
     imports: [
         CommonModule,
@@ -32,7 +34,8 @@ import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.
         CategoryFilterComponent,
         CountSelectorComponent,
         LoaderComponent,
-        CookieBannerComponent
+        CookieBannerComponent,
+        AllowedCharsDirective
     ]
 })
 export class SharedModule {

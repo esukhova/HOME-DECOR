@@ -29,14 +29,14 @@ export class InfoComponent implements OnInit {
         this.userInfoForm = this.fb.group({
             firstName: [''],
             lastName: [''],
-            phone: [''],
+            phone: ['', [Validators.pattern(/^\+?\d+$/)]],
             fatherName: [''],
             paymentType: [PaymentType.cashToCourier],
             email: ['', Validators.required],
             street: [''],
             house: [''],
-            entrance: [''],
-            apartment: ['']
+            entrance: ['', Validators.pattern(/^(?=.*\d)[\d]+$/)],
+            apartment: ['', Validators.pattern(/^(?=.*\d)[\d]+$/)],
         })
     }
 

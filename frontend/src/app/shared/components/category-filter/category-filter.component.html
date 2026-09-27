@@ -17,11 +17,11 @@
 
             <div class="catalog-filter-from-to" *ngIf="type">
                 <span>от</span>
-                <input type="text" maxlength="3" [ngModel]="from"
-                       (ngModelChange)="updateFilterParamFromTo(type + 'From', $event)" class="small-input">
+                <input type="text" #fromInput inputmode="numeric" maxlength="3" allowedChars="0-9" [maxChars]="3" [ngModel]="from"
+                       (ngModelChange)="updateFilterParamFromTo(type + 'From', $event, fromInput)" class="small-input">
                 <span>до</span>
-                <input type="text" maxlength="3" [ngModel]="to"
-                       (ngModelChange)="updateFilterParamFromTo(type + 'To', $event)" class="small-input">
+                <input type="text" #toInput inputmode="numeric" maxlength="3" allowedChars="0-9" [maxChars]="3" [ngModel]="to"
+                       (ngModelChange)="updateFilterParamFromTo(type + 'To', $event, toInput)" class="small-input">
                 <span>см</span>
             </div>
         </div>

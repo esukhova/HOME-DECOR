@@ -18,7 +18,7 @@
     &--catalog {
 
         .small-input {
-            width: clamp-f(32, 40);
+            width: clamp-f(28, 40, 320, 1320);
             height: clamp-f(20, 28);
 
             @include mobile {

@@ -46,14 +46,14 @@ export class OrderComponent implements OnInit {
         this.orderForm = this.fb.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
-            phone: ['', Validators.required],
+            phone: ['', [Validators.required, Validators.pattern(/^\+?\d+$/)]],
             fatherName: [''],
             paymentType: [PaymentType.cashToCourier, Validators.required],
             email: ['', [Validators.required, Validators.email]],
             street: [''],
             house: [''],
-            entrance: [''],
-            apartment: [''],
+            entrance: ['', Validators.pattern(/^(?=.*\d)[\d]+$/)],
+            apartment: ['', Validators.pattern(/^(?=.*\d)[\d]+$/)],
             comment: [''],
             agree: [false, Validators.requiredTrue]
         })

@@ -13,7 +13,7 @@
                                 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
                             </li>
                             <li>
-                                <a routerLink="/catalog" routerLinkActive="active">Каталог</a>
+                                <a routerLink="/catalog" [queryParams]="{page: 1}" routerLinkActive="active">Каталог</a>
                             </li>
                             <li>
                                 <a routerLink="/" fragment="reviews" [class.active]="isFragmentActive('/', 'reviews')">Отзывы</a>
@@ -101,7 +101,7 @@
                         <ul>
                             <li *ngFor="let category of categories">
                                 <a routerLink="/catalog" routerLinkActive="active"
-                                   [queryParams]="{types: category.typesUrl}">{{ category.name }}</a>
+                                   [queryParams]="{types: category.typesUrl, page: 1}">{{ category.name }}</a>
                             </li>
                         </ul>
                     </nav>
@@ -129,7 +129,7 @@
                     <a routerLink="/" routerLinkActive="active" (click)="toggleMobileMenu()" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
                 </li>
                 <li>
-                    <a routerLink="/catalog" routerLinkActive="active" (click)="toggleMobileMenu()">Каталог</a>
+                    <a routerLink="/catalog" [queryParams]="{page: 1}" routerLinkActive="active" (click)="toggleMobileMenu()">Каталог</a>
                 </li>
                 <li>
                     <a routerLink="/" fragment="reviews" (click)="toggleMobileMenu()" [class.active]="isFragmentActive('/', 'reviews')">Отзывы</a>
@@ -141,7 +141,7 @@
             <ul class="header-bottom-menu--mobile">
                     <li *ngFor="let category of categories">
                         <a routerLink="/catalog"
-                           [queryParams]="{types: category.typesUrl}"
+                           [queryParams]="{types: category.typesUrl, page: 1}"
                            routerLinkActive="active" (click)="toggleMobileMenu()">{{ category.name }}</a>
                     </li>
             </ul>

@@ -17,13 +17,11 @@
 }
 
 header.header {
-    padding: clamp-f(8, 30, 992, 1320) 0 clamp-f(12, 49, 992, 1320);
+    padding: clamp-f(8, 12, 992, 1320) 0 clamp-f(12, 49, 992, 1320);
     font-size: clamp-f(12, 16, 1200, 1320);
 
     @include mobile {
         font-size: clamp-value-m(12);
-        //position: sticky;
-        top: 0;
     }
 
     .container {
@@ -33,6 +31,8 @@ header.header {
         @include tablet {
             justify-content: start;
             gap: 24px;
+            max-width: unset;
+            padding: 0 16px;
         }
     }
 
@@ -431,7 +431,7 @@ header.header {
             font-size: clamp-value-m(18);
             line-height: 150%;
 
-            @media (max-width: 991px) and (orientation: landscape) {
+            @media (max-width: 991px) and (max-height: 600px) {
                 font-size: 14px;
                 gap: 4px;
             }
